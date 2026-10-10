@@ -67,9 +67,16 @@ async function main() {
   console.log('Express application initialized.\n');
 
   // ==========================================
-  // SUITE 1: Auth Endpoints & RBAC
+  // SUITE 1: Server Health & Authentication Lifecycle
   // ==========================================
   console.log('--- Suite 1: Authentication & User Lifecycle ---');
+
+  await runTest('1.0 Server health check returns status ok and uptime (200)', async () => {
+    const res = await request(app).get('/api/health');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.status, 'ok');
+    assert.strictEqual(typeof res.body.uptime, 'number');
+  });
 
   await runTest('1.1 Register Founder successfully (201, password masked)', async () => {
     await clearDB();
