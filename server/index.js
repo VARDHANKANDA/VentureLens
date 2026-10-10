@@ -39,6 +39,10 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', uptime: Math.floor(process.uptime()), timestamp: new Date().toISOString() });
+});
+
 app.use('/api/auth', authRouter);
 app.use('/api/profiles', profilesRouter);
 app.use('/api/readiness', readinessRouter);
