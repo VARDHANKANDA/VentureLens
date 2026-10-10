@@ -19,10 +19,21 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const mongoose = require('mongoose');
+
 const isTest = process.env.NODE_ENV === 'test';
 const sessionStore = isTest
   ? new session.MemoryStore()
-  : MongoStore.create({ mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/venturelens', ttl: 24 * 60 * 60 });
+  : MongoStore.create({
+      clientPromise: new Promise((resolve) => {
+        if (mongoose.connection.readyState === 1) {
+          resolve(mongoose.connection.getClient());
+        } else {
+          mongoose.connection.once('open', () => resolve(mongoose.connection.getClient()));
+        }
+      }),
+      ttl: 24 * 60 * 60
+    });
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'dev-fallback-secret',
