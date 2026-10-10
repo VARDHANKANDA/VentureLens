@@ -680,6 +680,410 @@ function UnauthorizedScreen() {
 }
 
 // ============================================================
+// LANDING PAGE (STARTUP MARKETPLACE AESTHETIC)
+// ============================================================
+function LandingPage() {
+  const { user } = React.useContext(AuthContext);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const scrollTo = (id) => {
+    setMobileMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    React.createElement('div', { className: 'landing-page' },
+      // Navigation Bar
+      React.createElement('header', { className: 'landing-nav' },
+        React.createElement('div', { className: 'landing-nav-container' },
+          React.createElement('a', { href: '/', className: 'landing-brand', onClick: (e) => { e.preventDefault(); scrollTo('hero'); } },
+            React.createElement('div', { className: 'landing-brand-logo' }, 'VL'),
+            React.createElement('span', { className: 'landing-brand-name' }, 'VentureLens')
+          ),
+          React.createElement('ul', { className: 'landing-nav-links' },
+            React.createElement('li', null, React.createElement('a', { href: '#hero', onClick: (e) => { e.preventDefault(); scrollTo('hero'); } }, 'Home')),
+            React.createElement('li', null, React.createElement('a', { href: '#how-it-works', onClick: (e) => { e.preventDefault(); scrollTo('how-it-works'); } }, 'How It Works')),
+            React.createElement('li', null, React.createElement('a', { href: '#features', onClick: (e) => { e.preventDefault(); scrollTo('features'); } }, 'Features')),
+            React.createElement('li', null, React.createElement('a', { href: '#for-founders', onClick: (e) => { e.preventDefault(); scrollTo('for-founders'); } }, 'For Founders')),
+            React.createElement('li', null, React.createElement('a', { href: '#for-investors', onClick: (e) => { e.preventDefault(); scrollTo('for-investors'); } }, 'For Investors'))
+          ),
+          React.createElement('div', { className: 'landing-nav-actions' },
+            user ? (
+              React.createElement('button', {
+                className: 'btn-nav-signup',
+                onClick: () => navigate(user.role === 'Founder' ? '/dashboard' : '/discover')
+              }, 'Go to Dashboard →')
+            ) : (
+              React.createElement(React.Fragment, null,
+                React.createElement('a', { href: '/login', className: 'btn-nav-login', onClick: (e) => { e.preventDefault(); navigate('/login'); } }, 'Log In'),
+                React.createElement('a', { href: '/register', className: 'btn-nav-signup', onClick: (e) => { e.preventDefault(); navigate('/register'); } }, 'Get Started →')
+              )
+            ),
+            React.createElement('button', {
+              className: 'btn-mobile-toggle',
+              'aria-label': 'Toggle Menu',
+              onClick: () => setMobileMenuOpen(!mobileMenuOpen)
+            }, '☰')
+          )
+        ),
+        // Mobile dropdown
+        mobileMenuOpen && React.createElement('div', { className: 'landing-mobile-menu open' },
+          React.createElement('a', { href: '#hero', onClick: (e) => { e.preventDefault(); scrollTo('hero'); } }, 'Home'),
+          React.createElement('a', { href: '#how-it-works', onClick: (e) => { e.preventDefault(); scrollTo('how-it-works'); } }, 'How It Works'),
+          React.createElement('a', { href: '#features', onClick: (e) => { e.preventDefault(); scrollTo('features'); } }, 'Features'),
+          React.createElement('a', { href: '#for-founders', onClick: (e) => { e.preventDefault(); scrollTo('for-founders'); } }, 'For Founders'),
+          React.createElement('a', { href: '#for-investors', onClick: (e) => { e.preventDefault(); scrollTo('for-investors'); } }, 'For Investors'),
+          !user ? [
+            React.createElement('a', { key: 'm-login', href: '/login', onClick: (e) => { e.preventDefault(); navigate('/login'); } }, 'Log In'),
+            React.createElement('a', { key: 'm-reg', href: '/register', onClick: (e) => { e.preventDefault(); navigate('/register'); } }, 'Get Started')
+          ] : (
+            React.createElement('a', { href: user.role === 'Founder' ? '/dashboard' : '/discover', onClick: (e) => { e.preventDefault(); navigate(user.role === 'Founder' ? '/dashboard' : '/discover'); } }, 'Go to Dashboard')
+          )
+        )
+      ),
+
+      // Hero Section
+      React.createElement('section', { id: 'hero', className: 'hero-section' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'hero-grid' },
+            React.createElement('div', { className: 'hero-content' },
+              React.createElement('div', { className: 'hero-eyebrow' },
+                React.createElement('span', { className: 'hero-eyebrow-dot' }),
+                'A clearer path to fundraising readiness'
+              ),
+              React.createElement('h1', { className: 'hero-headline' }, 'Your business story deserves more than a pitch.'),
+              React.createElement('p', { className: 'hero-supporting' },
+                'VentureLens helps founders organize their business information, understand their fundraising readiness, and present supporting evidence—while giving investors a clearer way to explore businesses and ask meaningful questions.'
+              ),
+              React.createElement('div', { className: 'hero-actions' },
+                React.createElement('button', {
+                  className: 'btn-hero-primary',
+                  onClick: () => navigate(user ? (user.role === 'Founder' ? '/dashboard' : '/discover') : '/register')
+                }, 'Get Started →'),
+                React.createElement('button', {
+                  className: 'btn-hero-secondary',
+                  onClick: () => {
+                    if (user && user.role === 'Investor') navigate('/discover');
+                    else if (user && user.role === 'Founder') navigate('/dashboard');
+                    else navigate('/register');
+                  }
+                }, 'Explore Businesses')
+              )
+            ),
+            // Product Preview Mockup
+            React.createElement('div', { className: 'hero-preview' },
+              React.createElement('div', { className: 'preview-card' },
+                React.createElement('div', { className: 'preview-badge-live' }, '● Live Preview'),
+                React.createElement('div', { className: 'preview-header' },
+                  React.createElement('div', null,
+                    React.createElement('div', { className: 'preview-company-name' }, 'Aura Robotics Inc.'),
+                    React.createElement('div', { className: 'preview-meta' }, 'Pre-Seed • Industrial Automation • $1.25M Target')
+                  ),
+                  React.createElement('span', { className: 'badge badge-published' }, 'Published')
+                ),
+                React.createElement('div', { className: 'preview-score-box' },
+                  React.createElement('div', { className: 'preview-score-header' },
+                    React.createElement('span', { className: 'preview-score-title' }, 'Fundraising Readiness Score'),
+                    React.createElement('span', { className: 'preview-score-pct' }, '85%')
+                  ),
+                  React.createElement('div', { className: 'preview-progress-bar' },
+                    React.createElement('div', { className: 'preview-progress-fill' })
+                  ),
+                  React.createElement('div', { className: 'preview-score-sub' }, '11 of 13 Core Diligence Sections Completed')
+                ),
+                React.createElement('div', { className: 'preview-chips' },
+                  React.createElement('span', { className: 'preview-chip done' }, '✓ Problem & Solution'),
+                  React.createElement('span', { className: 'preview-chip done' }, '✓ Target Market'),
+                  React.createElement('span', { className: 'preview-chip done' }, '✓ Unit Economics'),
+                  React.createElement('span', { className: 'preview-chip done' }, '✓ Cap Table'),
+                  React.createElement('span', { className: 'preview-chip' }, '⋯ IP Claims (Pending)')
+                ),
+                React.createElement('div', { className: 'preview-qa-box' },
+                  React.createElement('div', { className: 'preview-qa-label' }, 'Direct Diligence Inquiries'),
+                  React.createElement('div', { className: 'preview-qa-q' }, 'Q: "Can you detail your unit economics at 5,000 units/mo?"'),
+                  React.createElement('div', { className: 'preview-qa-a' }, 'A: "COGS drops from $420 to $185 at volume, delivering a 68% gross margin..."')
+                )
+              )
+            )
+          )
+        )
+      ),
+
+      // Value Proposition Section
+      React.createElement('section', { className: 'landing-section' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'section-header-center' },
+            React.createElement('div', { className: 'section-tag' }, 'Why VentureLens'),
+            React.createElement('h2', { className: 'section-title' }, 'Fundraising conversations start with clarity.'),
+            React.createElement('p', { className: 'section-subtitle' },
+              'Replace scattered pitch decks and disjointed email threads with a standardized due-diligence workspace.'
+            )
+          ),
+          React.createElement('div', { className: 'value-grid' },
+            React.createElement('div', { className: 'value-card' },
+              React.createElement('div', { className: 'value-icon' }, '📋'),
+              React.createElement('h3', { className: 'value-title' }, 'Structured Founder Workspace'),
+              React.createElement('p', { className: 'value-desc' },
+                'Founders can organize their 13-point business information, evaluate completeness with deterministic readiness scoring, and eliminate guesswork before meeting investors.'
+              )
+            ),
+            React.createElement('div', { className: 'value-card' },
+              React.createElement('div', { className: 'value-icon' }, '🔍'),
+              React.createElement('h3', { className: 'value-title' }, 'Transparent Business Discovery'),
+              React.createElement('p', { className: 'value-desc' },
+                'Investors can explore published startup profiles filtered by industry, stage, and funding goals with instant visibility into supporting evidence coverage.'
+              )
+            ),
+            React.createElement('div', { className: 'value-card' },
+              React.createElement('div', { className: 'value-icon' }, '💬'),
+              React.createElement('h3', { className: 'value-title' }, 'Direct Diligence Q&A'),
+              React.createElement('p', { className: 'value-desc' },
+                'Both parties can participate in a structured question-and-response workflow tied directly to profile sections, creating a clean audit trail.'
+              )
+            )
+          )
+        )
+      ),
+
+      // How It Works Section
+      React.createElement('section', { id: 'how-it-works', className: 'landing-section how-section' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'section-header-center' },
+            React.createElement('div', { className: 'section-tag' }, 'Streamlined Journeys'),
+            React.createElement('h2', { className: 'section-title' }, 'How VentureLens Works'),
+            React.createElement('p', { className: 'section-subtitle' },
+              'A purpose-built due diligence workflow designed for founders and investors.'
+            )
+          ),
+          React.createElement('div', { className: 'how-grid' },
+            // Founder Track
+            React.createElement('div', { className: 'how-track-card' },
+              React.createElement('div', { className: 'how-track-badge founder' }, 'For Founders'),
+              React.createElement('h3', { className: 'how-track-title' }, 'From Raw Pitch to Diligence Ready'),
+              React.createElement('div', { className: 'how-steps-list' },
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '1'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Build your business profile'),
+                    React.createElement('p', null, 'Fill out 13 structured sections covering problem, solution, market size, business model, and funding requirements.')
+                  )
+                ),
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '2'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Organize readiness and evidence'),
+                    React.createElement('p', null, 'Track your readiness score in real-time and map documentary support across legal, financial, and product categories.')
+                  )
+                ),
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '3'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Publish and respond to inquiries'),
+                    React.createElement('p', null, 'Toggle public visibility when ready and handle diligence questions from prospective investors in one organized inbox.')
+                  )
+                )
+              )
+            ),
+            // Investor Track
+            React.createElement('div', { className: 'how-track-card' },
+              React.createElement('div', { className: 'how-track-badge investor' }, 'For Investors'),
+              React.createElement('h3', { className: 'how-track-title' }, 'Efficient Discovery & Deep Diligence'),
+              React.createElement('div', { className: 'how-steps-list' },
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '1'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Discover published business profiles'),
+                    React.createElement('p', null, 'Browse curated startup profiles with instant filtering by sector, stage, and capital need.')
+                  )
+                ),
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '2'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Review available information and evidence'),
+                    React.createElement('p', null, 'Inspect comprehensive business claims and check documentary evidence coverage before scheduling calls.')
+                  )
+                ),
+                React.createElement('div', { className: 'how-step-item' },
+                  React.createElement('div', { className: 'how-step-num' }, '3'),
+                  React.createElement('div', { className: 'how-step-content' },
+                    React.createElement('h4', null, 'Ask targeted diligence questions'),
+                    React.createElement('p', null, 'Submit structured inquiries tied to specific claims and maintain a complete audit history of answers.')
+                  )
+                )
+              )
+            )
+          )
+        )
+      ),
+
+      // Feature Showcase Section
+      React.createElement('section', { id: 'features', className: 'landing-section' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'section-header-center' },
+            React.createElement('div', { className: 'section-tag' }, 'Platform Capabilities'),
+            React.createElement('h2', { className: 'section-title' }, 'Built for Due Diligence Excellence'),
+            React.createElement('p', { className: 'section-subtitle' },
+              'Everything founders and investors need to conduct thorough, organized evaluation.'
+            )
+          ),
+          React.createElement('div', { className: 'features-grid' },
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '🎯'),
+              React.createElement('h3', { className: 'feature-title' }, 'Fundraising Readiness'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Understand which profile sections are complete and receive actionable guidance for missing information with a 13-point deterministic scoring model.'
+              )
+            ),
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '📁'),
+              React.createElement('h3', { className: 'feature-title' }, 'Evidence Coverage'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Track supporting documentation across key operational domains and identify missing, outdated, or awaiting-review records without file upload risks.'
+              )
+            ),
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '🌐'),
+              React.createElement('h3', { className: 'feature-title' }, 'Business Discovery'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Explore published startup profiles and find vetted businesses with comprehensive industry, stage, and funding filters.'
+              )
+            ),
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '❓'),
+              React.createElement('h3', { className: 'feature-title' }, 'Investor Questions'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Enable structured questions and responses between investors and founders with distinct Open, Answered, and Closed workflow stages.'
+              )
+            ),
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '⚙️'),
+              React.createElement('h3', { className: 'feature-title' }, 'Profile Management'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Let founders maintain their business information with complete privacy control over when their profile is published or unpublished.'
+              )
+            ),
+            React.createElement('div', { className: 'feature-card' },
+              React.createElement('div', { className: 'feature-icon-box' }, '📜'),
+              React.createElement('h3', { className: 'feature-title' }, 'Question History'),
+              React.createElement('p', { className: 'feature-desc' },
+                'Allow users to revisit authorized questions and responses, creating a permanent diligence record for investment evaluation.'
+              )
+            )
+          )
+        )
+      ),
+
+      // Separate Audience Sections
+      React.createElement('section', { className: 'landing-section' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'audience-grid' },
+            // For Founders
+            React.createElement('div', { id: 'for-founders', className: 'audience-card founder' },
+              React.createElement('div', null,
+                React.createElement('div', { className: 'audience-tag' }, 'Founder Workspace'),
+                React.createElement('h3', { className: 'audience-title' }, 'Ready to present your business with confidence?'),
+                React.createElement('p', { className: 'audience-desc' },
+                  'Present your business clearly, organize supporting information, and understand which parts of your fundraising profile need attention.'
+                )
+              ),
+              React.createElement('button', {
+                className: 'btn-audience',
+                onClick: () => navigate(user && user.role === 'Founder' ? '/dashboard' : '/register')
+              }, 'Build Your Profile →')
+            ),
+            // For Investors
+            React.createElement('div', { id: 'for-investors', className: 'audience-card investor' },
+              React.createElement('div', null,
+                React.createElement('div', { className: 'audience-tag' }, 'Investor Portal'),
+                React.createElement('h3', { className: 'audience-title' }, 'Looking for structured startup diligence?'),
+                React.createElement('p', { className: 'audience-desc' },
+                  'Explore published businesses, review available information, and start meaningful due-diligence conversations.'
+                )
+              ),
+              React.createElement('button', {
+                className: 'btn-audience',
+                onClick: () => navigate(user && user.role === 'Investor' ? '/discover' : '/register')
+              }, 'Explore Businesses →')
+            )
+          )
+        )
+      ),
+
+      // Final Call to Action
+      React.createElement('section', { className: 'cta-section' },
+        React.createElement('div', { className: 'cta-box' },
+          React.createElement('h2', { className: 'cta-headline' }, 'Bring more clarity to your next fundraising conversation.'),
+          React.createElement('p', { className: 'cta-sub' },
+            'Organize your business information or discover businesses that interest you.'
+          ),
+          React.createElement('div', { className: 'cta-buttons' },
+            React.createElement('button', {
+              className: 'btn-hero-primary',
+              onClick: () => navigate(user ? (user.role === 'Founder' ? '/dashboard' : '/discover') : '/register')
+            }, 'Get Started →'),
+            React.createElement('button', {
+              className: 'btn-hero-secondary',
+              onClick: () => {
+                if (user && user.role === 'Investor') navigate('/discover');
+                else if (user && user.role === 'Founder') navigate('/dashboard');
+                else navigate('/register');
+              }
+            }, 'Explore Businesses')
+          )
+        )
+      ),
+
+      // Footer
+      React.createElement('footer', { className: 'landing-footer' },
+        React.createElement('div', { className: 'landing-container' },
+          React.createElement('div', { className: 'footer-top' },
+            React.createElement('div', { className: 'footer-brand-col' },
+              React.createElement('div', { className: 'footer-brand-title' }, 'VentureLens'),
+              React.createElement('p', { className: 'footer-desc' },
+                'A fundraising-readiness and due-diligence workspace empowering startup founders and angel/seed investors.'
+              )
+            ),
+            React.createElement('div', null,
+              React.createElement('div', { className: 'footer-col-title' }, 'Platform'),
+              React.createElement('ul', { className: 'footer-links' },
+                React.createElement('li', null, React.createElement('a', { href: '#how-it-works', onClick: (e) => { e.preventDefault(); scrollTo('how-it-works'); } }, 'How It Works')),
+                React.createElement('li', null, React.createElement('a', { href: '#features', onClick: (e) => { e.preventDefault(); scrollTo('features'); } }, 'Features')),
+                React.createElement('li', null, React.createElement('a', { href: '#for-founders', onClick: (e) => { e.preventDefault(); scrollTo('for-founders'); } }, 'For Founders')),
+                React.createElement('li', null, React.createElement('a', { href: '#for-investors', onClick: (e) => { e.preventDefault(); scrollTo('for-investors'); } }, 'For Investors'))
+              )
+            ),
+            React.createElement('div', null,
+              React.createElement('div', { className: 'footer-col-title' }, 'Account'),
+              React.createElement('ul', { className: 'footer-links' },
+                React.createElement('li', null, React.createElement('a', { href: '/login', onClick: (e) => { e.preventDefault(); navigate('/login'); } }, 'Sign In')),
+                React.createElement('li', null, React.createElement('a', { href: '/register', onClick: (e) => { e.preventDefault(); navigate('/register'); } }, 'Create Account')),
+                user && React.createElement('li', null, React.createElement('a', { href: user.role === 'Founder' ? '/dashboard' : '/discover', onClick: (e) => { e.preventDefault(); navigate(user.role === 'Founder' ? '/dashboard' : '/discover'); } }, 'Dashboard'))
+              )
+            ),
+            React.createElement('div', null,
+              React.createElement('div', { className: 'footer-col-title' }, 'Capabilities'),
+              React.createElement('ul', { className: 'footer-links' },
+                React.createElement('li', null, React.createElement('span', { style: { color: '#94a3b8' } }, '13-Point Scoring')),
+                React.createElement('li', null, React.createElement('span', { style: { color: '#94a3b8' } }, 'Evidence Mapping')),
+                React.createElement('li', null, React.createElement('span', { style: { color: '#94a3b8' } }, 'Direct Diligence Q&A')),
+                React.createElement('li', null, React.createElement('span', { style: { color: '#94a3b8' } }, 'RBAC Security'))
+              )
+            )
+          ),
+          React.createElement('div', { className: 'footer-bottom' },
+            React.createElement('div', null, '© ' + new Date().getFullYear() + ' VentureLens. All rights reserved.'),
+            React.createElement('div', null, 'Fundraising Readiness & Due Diligence Platform')
+          )
+        )
+      )
+    )
+  );
+}
+
+// ============================================================
 // APPLICATION ROOT & ROUTER GUARD
 // ============================================================
 function App() {
@@ -692,7 +1096,12 @@ function App() {
     );
   }
 
-  // Public unauthenticated routes
+  // Public Landing Page at root /
+  if (path === '/') {
+    return React.createElement(LandingPage);
+  }
+
+  // Public unauthenticated auth routes
   if (path === '/login') {
     if (user) {
       navigate(user.role === 'Founder' ? '/dashboard' : '/discover');
@@ -709,17 +1118,7 @@ function App() {
     return React.createElement(RegisterScreen);
   }
 
-  // Root path redirection
-  if (path === '/') {
-    if (!user) {
-      navigate('/login');
-    } else {
-      navigate(user.role === 'Founder' ? '/dashboard' : '/discover');
-    }
-    return null;
-  }
-
-  // Auth Guard
+  // Auth Guard for protected application routes
   if (!user) {
     navigate('/login');
     return null;
@@ -766,3 +1165,4 @@ root.render(
     )
   )
 );
+
