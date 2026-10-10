@@ -1,0 +1,25 @@
+/* VentureLens - Questions Styles */
+.question-list { display: flex; flex-direction: column; gap: 16px; }
+.question-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); }
+.question-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.question-meta { font-size: 0.8rem; color: var(--color-text-secondary); margin-bottom: 8px; }
+.question-text { font-size: 0.95rem; color: var(--color-text-primary); line-height: 1.6; }
+.question-section { font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 6px; font-style: italic; }
+.question-response { margin-top: 16px; padding: 14px 16px; background: var(--color-surface); border-radius: var(--radius); border-left: 3px solid var(--color-teal); }
+.question-response-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-teal); margin-bottom: 6px; }
+.question-response-text { font-size: 0.875rem; color: var(--color-text-primary); line-height: 1.6; }
+.question-response-date { font-size: 0.75rem; color: var(--color-text-light); margin-top: 6px; }
+.question-no-response { font-size: 0.875rem; color: var(--color-text-secondary); font-style: italic; margin-top: 12px; padding: 10px 14px; background: var(--color-surface); border-radius: var(--radius); }
+.response-form { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--color-border); }
+.response-form-title { font-size: 0.875rem; font-weight: 600; margin-bottom: 10px; }
+.question-card-actions { display: flex; gap: 8px; margin-top: 14px; }
+.profile-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; }
+.profile-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-teal); }
+.profile-card-name { font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; }
+.profile-card-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+.profile-card-tag { font-size: 0.78rem; color: var(--color-text-secondary); background: var(--color-surface); border: 1px solid var(--color-border); padding: 2px 8px; border-radius: 9999px; }
+.profile-detail-section { margin-bottom: 28px; }
+.profile-detail-section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--color-border); }
+.profile-detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.investor-question-form { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 24px; margin-top: 28px; box-shadow: var(--shadow); }
+.investor-question-form h3 { margin-bottom: 16px; font-size: 1rem; }

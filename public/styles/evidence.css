@@ -1,0 +1,27 @@
+/* VentureLens - Evidence Coverage Map Styles */
+.evidence-map { }
+.evidence-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.evidence-category { margin-bottom: 24px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+.evidence-category-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.evidence-category-title { font-size: 0.9rem; font-weight: 700; color: var(--color-text-primary); }
+.evidence-category-meta { display: flex; align-items: center; gap: 10px; }
+.evidence-count { font-size: 0.75rem; color: var(--color-text-secondary); background: var(--color-white); border: 1px solid var(--color-border); border-radius: 9999px; padding: 2px 8px; }
+.evidence-table { width: 100%; border-collapse: collapse; }
+.evidence-table th { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--color-border); }
+.evidence-table td { padding: 12px 16px; font-size: 0.875rem; color: var(--color-text-primary); border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.evidence-table tr:last-child td { border-bottom: none; }
+.evidence-table tr:hover td { background: hsl(225,30%,98%); }
+.evidence-title { font-weight: 500; }
+.evidence-docref { font-size: 0.8rem; color: var(--color-text-secondary); font-style: italic; }
+.evidence-actions { display: flex; gap: 6px; white-space: nowrap; }
+/* ---- Modal ---- */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal { background: var(--color-white); border-radius: var(--radius-lg); padding: 28px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.modal-title { font-size: 1.1rem; font-weight: 700; }
+.modal-close { background: none; border: none; cursor: pointer; color: var(--color-text-secondary); font-size: 1.2rem; padding: 4px; border-radius: var(--radius); }
+.modal-close:hover { background: var(--color-surface); color: var(--color-text-primary); }
+.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.confirm-dialog { text-align: center; padding: 8px 0; }
+.confirm-dialog p { margin-bottom: 20px; color: var(--color-text-secondary); }
+@media (max-width: 767px) { .evidence-table th:nth-child(3), .evidence-table td:nth-child(3) { display: none; } }

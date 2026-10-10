@@ -1,0 +1,25 @@
+/* VentureLens - Dashboard Styles */
+.dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 28px; }
+.readiness-widget { background: var(--color-navy); color: var(--color-white); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.readiness-score { font-size: 3rem; font-weight: 800; color: var(--color-teal-light); line-height: 1; margin-bottom: 4px; }
+.readiness-label { font-size: 0.8rem; color: hsl(225,20%,65%); text-transform: uppercase; letter-spacing: 0.08em; }
+.readiness-bar { width: 100%; background: hsl(225,30%,25%); border-radius: 9999px; height: 8px; margin: 16px 0; overflow: hidden; }
+.readiness-bar-fill { height: 100%; background: var(--color-teal); border-radius: 9999px; transition: width 0.5s ease; }
+.readiness-formula { font-size: 0.75rem; color: hsl(225,20%,55%); margin-top: 8px; }
+.incomplete-list { }
+.incomplete-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+.incomplete-item:last-child { border-bottom: none; }
+.incomplete-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-warning); flex-shrink: 0; margin-top: 6px; }
+.incomplete-section { font-size: 0.875rem; font-weight: 600; color: var(--color-text-primary); text-transform: capitalize; }
+.incomplete-guidance { font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 2px; }
+.profile-summary { padding: 20px 0; }
+.profile-field { margin-bottom: 16px; }
+.profile-field-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); margin-bottom: 4px; }
+.profile-field-value { font-size: 0.9rem; color: var(--color-text-primary); }
+.profile-field-empty { font-size: 0.875rem; color: var(--color-text-light); font-style: italic; }
+.profile-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--color-border); }
+.profile-meta-item { font-size: 0.8rem; color: var(--color-text-secondary); }
+.profile-meta-item strong { color: var(--color-text-primary); }
+.publication-toggle { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--color-surface); border-radius: var(--radius); border: 1px solid var(--color-border); }
+.publication-toggle-label { font-size: 0.875rem; color: var(--color-text-secondary); flex: 1; }
+@media (max-width: 767px) { .dashboard-grid { grid-template-columns: 1fr; } }
